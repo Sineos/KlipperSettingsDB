@@ -1,0 +1,35 @@
+{
+  "Board Information": {
+    "Board Manufacturer": "BIGTREETECH",
+    "Board Name": "Octopus Pro",
+    "Board Revision": "1.0",
+    "USB2CAN Enabled": true,
+    "Klipper Flashing Method": "SD Card",
+    "Katapult Flashing Method": ["SD Card", "dfu-util"]
+  },
+  "Common Settings": {
+    "Micro-controller Architecture": "STMicroelectronics STM32",
+    "Processor model": "STM32F446",
+    "Communication interface USB": "USB",
+    "Communication interface USB Pins": ["PA11", "PA12"],
+    "Communication interface USART": "USART2",
+    "Communication interface USART Pins": ["PD6", "PD5"],
+    "Communication interface CAN": false,
+    "Communication interface CAN Pins": ["n/a", "n/a"],
+    "Baud rate for serial port": "250000",
+    "CAN bus speed": "1000000"
+  },
+  "Klipper Settings": {
+    "Bootloader offset": "32 KiB",
+    "Clock Reference": "12 MHz",
+    "CAN Pins USB2CAN": ["PD0", "PD1"],
+    "GPIO pins to set at micro-controller startup": false
+  },
+  "Katapult Settings": {
+    "Build Katapult deployment application": false,
+    "Application start offset": "32 KiB",
+    "GPIO pins to set on bootloader entry": false,
+    "Support bootloader entry on rapid double click of reset button": true,
+    "Enable Status LED": "PA13"
+  }
+}
