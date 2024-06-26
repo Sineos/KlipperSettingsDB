@@ -31,5 +31,10 @@
     "GPIO pins to set on bootloader entry": false,
     "Support bootloader entry on rapid double click of reset button": true,
     "Enable Status LED": "PA13"
+  },
+  "Miscellaneous": {
+	"Board Link 1": "https://github.com/bigtreetech/BIGTREETECH-OCTOPUS-Pro",
+	"Board Link 2": "https://github.com/bigtreetech/BIGTREETECH-OCTOPUS-V1.0",
+	"Comment": "",
   }
 }
