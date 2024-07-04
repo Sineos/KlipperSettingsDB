@@ -2,40 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Klipper Firmware Settings</title>
-    <link href="https://unpkg.com/tabulator-tables@6.2.1/dist/css/tabulator.min.css" rel="stylesheet">
-    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@6.2.1/dist/js/tabulator.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/tabulator-tables@6.2.0/dist/css/tabulator.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@6.2.0/dist/js/tabulator.min.js"></script>
     <style>
-      .tabulator-col .tabulator-col-title {
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      max-width: 40em; max-width: 35ch;
-      }
-      .tabulator-headers {
-      font-size: 1.2em;
-      }
-      .board-information {
-      background-color: #e3f2fd;
-      }
-      .common-settings {
-      background-color: #ffebee;
-      }
-      .klipper-settings {
-      background-color: #e8f5e9;
-      }
-      .katapult-settings {
-      background-color: #f3e5f5;
-      }
-      .misc-settings {
-      background-color: #fff2cc;
+      .tabulator {
+      width: 1660px;
       }
     </style>
   </head>
   <body>
     <h1>Klipper Firmware Settings</h1>
-    <div id="table"></div>
+    <div id="board-table"></div>
     <script src="script.js"></script>
   </body>
 </html>

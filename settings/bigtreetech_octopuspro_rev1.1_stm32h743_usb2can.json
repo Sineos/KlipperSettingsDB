@@ -1,0 +1,40 @@
+{
+  "Board Information": {
+    "Manufacturer": "BIGTREETECH",
+    "Name": "Octopus Pro",
+    "Revision": "1.1",
+    "Role": "USB 2 CAN Bridge",
+    "Flashing Methods": {
+      "Klipper": "make flash",
+      "Katapult": [
+        "dfu-util",
+        "SD-card"
+      ]
+    },
+    "Links": {
+      "Board Link 1": "https://github.com/bigtreetech/BIGTREETECH-OCTOPUS-Pro",
+      "Board Link 2": "https://github.com/bigtreetech/BIGTREETECH-OCTOPUS-V1.0"
+    },
+    "Comment": "bla bla"
+  },
+  "Klipper Settings": [
+    "MACH_STM32",
+    "MACH_STM32H743",
+    "STM32_FLASH_START_20000",
+    "STM32_CLOCK_REF_25M",
+    "STM32_USBCANBUS_PA11_PA12",
+    "STM32_CMENU_CANBUS_PB8_PB9",
+    "CANBUS_FREQUENCY=1000000"
+  ],
+  "Katapult Settings": [
+    "MACH_STM32",
+    "MACH_STM32H743",
+    "STM32_FLASH_START_20000",
+    "STM32_CLOCK_REF_25M",
+    "STM32_USB_PA11_PA12",
+    "STM32_APP_START_20000",
+    "ENABLE_DOUBLE_RESET=y",
+    "ENABLE_LED=y",
+    "STATUS_LED_PIN=PA13"
+  ]
+}

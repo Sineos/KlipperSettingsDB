@@ -1,163 +1,79 @@
 [
-  {
-    "Board Information": {
-      "Board Manufacturer": "BIGTREETECH",
-      "Board Name": "Octopus Pro",
-      "Board Revision": "1.0",
-      "USB2CAN Enabled": true,
-      "Klipper Flashing Method": "SD Card",
-      "Katapult Flashing Method": [
-        "SD Card",
-        "dfu-util"
-      ]
+    {
+        "Board Information": {
+            "Manufacturer": "BIGTREETECH",
+            "Name": "Octopus Pro",
+            "Revision": "1.1",
+            "Role": "USB 2 CAN Bridge",
+            "Flashing Methods": {
+                "Klipper": "make flash",
+                "Katapult": [
+                    "dfu-util",
+                    "SD-card"
+                ]
+            },
+            "Links": {
+                "Board Link 1": "https://github.com/bigtreetech/BIGTREETECH-OCTOPUS-Pro",
+                "Board Link 2": "https://github.com/bigtreetech/BIGTREETECH-OCTOPUS-V1.0"
+            },
+            "Comment": "bla bla"
+        },
+        "Klipper Settings": [
+            "MACH_STM32",
+            "MACH_STM32H743",
+            "STM32_FLASH_START_20000",
+            "STM32_CLOCK_REF_25M",
+            "STM32_USBCANBUS_PA11_PA12",
+            "STM32_CMENU_CANBUS_PB8_PB9",
+            "CANBUS_FREQUENCY=1000000"
+        ],
+        "Katapult Settings": [
+            "MACH_STM32",
+            "MACH_STM32H743",
+            "STM32_FLASH_START_20000",
+            "STM32_CLOCK_REF_25M",
+            "STM32_USB_PA11_PA12",
+            "STM32_APP_START_20000",
+            "ENABLE_DOUBLE_RESET=y",
+            "ENABLE_LED=y",
+            "STATUS_LED_PIN=PA13"
+        ]
     },
-    "Common Settings": {
-      "Micro-controller Architecture": "STMicroelectronics STM32",
-      "Processor model": "STM32F446",
-      "Communication interface USB": "USB",
-      "Communication interface USB Pins": [
-        "PA11",
-        "PA12"
-      ],
-      "Communication interface USART": "USART2",
-      "Communication interface USART Pins": [
-        "PD6",
-        "PD5"
-      ],
-      "Communication interface CAN": false,
-      "Communication interface CAN Pins": [
-        "n/a",
-        "n/a"
-      ],
-      "Baud rate for serial port": "250000",
-      "CAN bus speed": "1000000"
-    },
-    "Klipper Settings": {
-      "Bootloader offset": "32 KiB",
-      "Clock Reference": "12 MHz",
-      "CAN Pins USB2CAN": [
-        "PD0",
-        "PD1"
-      ],
-      "GPIO pins to set at micro-controller startup": false
-    },
-    "Katapult Settings": {
-      "Build Katapult deployment application": false,
-      "Application start offset": "32 KiB",
-      "GPIO pins to set on bootloader entry": false,
-      "Support bootloader entry on rapid double click of reset button": true,
-      "Enable Status LED": "PA13"
-    },
-    "Miscellaneous": {
-      "Board Link 1": "https://github.com/bigtreetech/BIGTREETECH-OCTOPUS-Pro",
-      "Board Link 2": "https://github.com/bigtreetech/BIGTREETECH-OCTOPUS-V1.0",
-      "Comment": ""
+    {
+        "Board Information": {
+            "Manufacturer": "Mellow",
+            "Name": "SHT42",
+            "Revision": "1.0",
+            "Role": "CAN",
+            "Flashing Methods": {
+                "Klipper": "make flash",
+                "Katapult": [
+                    "dfu-util"
+                ]
+            },
+            "Links": {
+                "Board Link 1": "https://mellow-3d.github.io/fly-sht42_general.html",
+                "Board Link 2": ""
+            },
+            "Comment": "bla bla"
+        },
+        "Klipper Settings": [
+            "MACH_STM32",
+            "MACH_STM32F072",
+            "STM32_FLASH_START_2000",
+            "STM32_CLOCK_REF_8M",
+            "STM32_MMENU_CANBUS_PB8_PB9",
+            "CANBUS_FREQUENCY=1000000"
+        ],
+        "Katapult Settings": [
+            "MACH_STM32",
+            "MACH_STM32F072",
+            "STM32_FLASH_START_2000",
+            "STM32_CLOCK_REF_8M",
+            "STM32_MMENU_CANBUS_PB8_PB9",
+            "CANBUS_FREQUENCY=1000000",
+            "STM32_APP_START_2000",
+            "ENABLE_DOUBLE_RESET=y"
+        ]
     }
-  },
-  {
-    "Board Information": {
-      "Board Manufacturer": "BIGTREETECH",
-      "Board Name": "Octopus Pro",
-      "Board Revision": "1.1",
-      "USB2CAN Enabled": true,
-      "Klipper Flashing Method": "SD Card",
-      "Katapult Flashing Method": [
-        "SD Card",
-        "dfu-util"
-      ]
-    },
-    "Common Settings": {
-      "Micro-controller Architecture": "STMicroelectronics STM32",
-      "Processor model": "STM32H723",
-      "Communication interface USB": "USB",
-      "Communication interface USB Pins": [
-        "PA11",
-        "PA12"
-      ],
-      "Communication interface USART": "USART2",
-      "Communication interface USART Pins": [
-        "PD6",
-        "PD5"
-      ],
-      "Communication interface CAN": false,
-      "Communication interface CAN Pins": [
-        "n/a",
-        "n/a"
-      ],
-      "Baud rate for serial port": "250000",
-      "CAN bus speed": "1000000"
-    },
-    "Klipper Settings": {
-      "Bootloader offset": "128 KiB",
-      "Clock Reference": "25 MHz",
-      "CAN Pins USB2CAN": [
-        "PD0",
-        "PD1"
-      ],
-      "GPIO pins to set at micro-controller startup": false
-    },
-    "Katapult Settings": {
-      "Build Katapult deployment application": false,
-      "Application start offset": "128 KiB",
-      "GPIO pins to set on bootloader entry": false,
-      "Support bootloader entry on rapid double click of reset button": true,
-      "Enable Status LED": "PA13"
-    },
-    "Miscellaneous": {
-      "Board Link 1": "https://github.com/bigtreetech/BIGTREETECH-OCTOPUS-Pro",
-      "Board Link 2": "https://github.com/bigtreetech/BIGTREETECH-OCTOPUS-V1.0",
-      "Comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-    }
-  },
-  {
-    "Board Information": {
-      "Board Manufacturer": "Mellow",
-      "Board Name": "SHT42",
-      "Board Revision": "1.0",
-      "USB2CAN Enabled": false,
-      "Klipper Flashing Method": "make flash",
-      "Katapult Flashing Method": [
-        "dfu-util"
-      ]
-    },
-    "Common Settings": {
-      "Micro-controller Architecture": "STMicroelectronics STM32",
-      "Processor model": "STM32f072",
-      "Communication interface USB": "USB",
-      "Communication interface USB Pins": [
-        "PA11",
-        "PA12"
-      ],
-      "Communication interface USART": false,
-      "Communication interface USART Pins": [
-        "n/a",
-        "n/a"
-      ],
-      "Communication interface CAN": "CAN",
-      "Communication interface CAN Pins": [
-        "PA8",
-        "PA9"
-      ],
-      "Baud rate for serial port": "250000",
-      "CAN bus speed": "1000000"
-    },
-    "Klipper Settings": {
-      "Bootloader offset": "8 KiB",
-      "Clock Reference": "8 MHz",
-      "CAN Pins USB2CAN": false,
-      "GPIO pins to set at micro-controller startup": false
-    },
-    "Katapult Settings": {
-      "Build Katapult deployment application": false,
-      "Application start offset": "8 KiB",
-      "GPIO pins to set on bootloader entry": false,
-      "Support bootloader entry on rapid double click of reset button": true,
-      "Enable Status LED": false
-    },
-    "Miscellaneous": {
-      "Board Link 1": "https://mellow-3d.github.io/fly-sht42_general.html",
-      "Board Link 2": "",
-      "Comment": ""
-    }
-  }
 ]

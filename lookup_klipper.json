@@ -1,0 +1,250 @@
+{
+  "General Settings": {
+    "LOW_LEVEL_OPTIONS": "Enable extra low-level configuration options",
+    "SERIAL_BAUD": "Baud rate for serial port",
+    "INITIAL_PINS": "GPIO pins to set at micro-controller startup",
+    "STM32F103GD_DISABLE_SWD": "Disable SWD at startup (for GigaDevice stm32f103 clones)",
+    "MACH_STM32F103x6": "Only 10KiB of RAM (for rare stm32f103x6 variant)",
+    "CANBUS_FREQUENCY": "CAN bus speed"
+  },
+  "Micro-controller Architecture": {
+    "MACH_AVR": "Atmega AVR",
+    "MACH_ATSAM": "SAM3/SAM4/SAM E70 (Due and Duet)",
+    "MACH_ATSAMD": "SAMC21/SAMD21/SAMD51/SAME5x",
+    "MACH_LPC176X": "LPC176x (Smoothieboard)",
+    "MACH_STM32": "STMicroelectronics STM32",
+    "MACH_HC32F460": "Huada Semiconductor HC32F460",
+    "MACH_RP2040": "Raspberry Pi RP2040",
+    "MACH_PRU": "Beaglebone PRU",
+    "MACH_AR100": "Allwinner A64 AR100",
+    "MACH_LINUX": "Linux process",
+    "MACH_SIMU": "Host simulator"
+  },
+  "MACH_STM32": {
+    "Processor model": {
+      "MACH_STM32F103": "STM32F103",
+      "MACH_STM32F207": "STM32F207",
+      "MACH_STM32F401": "STM32F401",
+      "MACH_STM32F405": "STM32F405",
+      "MACH_STM32F407": "STM32F407",
+      "MACH_STM32F429": "STM32F429",
+      "MACH_STM32F446": "STM32F446",
+      "MACH_STM32F765": "STM32F765",
+      "MACH_STM32F031": "STM32F031",
+      "MACH_STM32F042": "STM32F042",
+      "MACH_STM32F070": "STM32F070",
+      "MACH_STM32F072": "STM32F072",
+      "MACH_STM32G070": "STM32G070",
+      "MACH_STM32G071": "STM32G071",
+      "MACH_STM32G0B0": "STM32G0B0",
+      "MACH_STM32G0B1": "STM32G0B1",
+      "MACH_STM32G431": "STM32G431",
+      "MACH_STM32H723": "STM32H723",
+      "MACH_STM32H743": "STM32H743",
+      "MACH_STM32H750": "STM32H750",
+      "MACH_STM32L412": "STM32L412",
+      "MACH_N32G452": "Nation N32G452",
+      "MACH_N32G455": "Nation N32G455"
+    },
+    "Bootloader offset": {
+      "STM32_FLASH_START_2000": "8KiB bootloader",
+      "STM32_FLASH_START_5000": "20KiB bootloader",
+      "STM32_FLASH_START_7000": "28KiB bootloader",
+      "STM32_FLASH_START_8000": "32KiB bootloader",
+      "STM32_FLASH_START_8800": "34KiB bootloader (Chitu v6 Bootloader)",
+      "STM32_FLASH_START_20200": "128KiB bootloader with 512 byte offset (Prusa Buddy)",
+      "STM32_FLASH_START_C000": "48KiB bootloader (MKS Robin Nano V3)",
+      "STM32_FLASH_START_10000": "64KiB bootloader",
+      "STM32_FLASH_START_800": "2KiB bootloader (HID Bootloader)",
+      "STM32_FLASH_START_1000": "4KiB bootloader",
+      "STM32_FLASH_START_4000": "16KiB bootloader (HID Bootloader)",
+      "STM32_FLASH_START_20000": "128KiB bootloader (SKR SE BX v2.0)",
+      "STM32_FLASH_START_0000": "No bootloader"
+    },
+    "Clock Reference": {
+      "STM32_CLOCK_REF_8M": "8 MHz crystal",
+      "STM32_CLOCK_REF_12M": "12 MHz crystal",
+      "STM32_CLOCK_REF_16M": "16 MHz crystal",
+      "STM32_CLOCK_REF_20M": "20 MHz crystal",
+      "STM32_CLOCK_REF_24M": "24 MHz crystal",
+      "STM32_CLOCK_REF_25M": "25 MHz crystal",
+      "STM32_CLOCK_REF_INTERNAL": "Internal clock"
+    },
+    "Communication interface": {
+      "STM32_USB_PA11_PA12": "USB (on PA11/PA12)",
+      "STM32_USB_PA11_PA12_REMAP": "USB (on PA9/PA10)",
+      "STM32_USB_PB14_PB15": "USB (on PB14/PB15)",
+      "STM32_SERIAL_USART1": "Serial (on USART1 PA10/PA9)",
+      "STM32_SERIAL_USART1_ALT_PB7_PB6": "Serial (on USART1 PB7/PB6)",
+      "STM32_SERIAL_USART2": "Serial (on USART2 PA3/PA2)",
+      "STM32_SERIAL_USART2_ALT_PA15_PA14": "Serial (on USART2 PA15/PA14)",
+      "STM32_SERIAL_USART2_ALT_PB4_PB3": "Serial (on USART2 PB4/PB3)",
+      "STM32_SERIAL_USART2_ALT_PD6_PD5": "Serial (on USART2 PD6/PD5)",
+      "STM32_SERIAL_USART3": "Serial (on USART3 PB11/PB10)",
+      "STM32_SERIAL_USART3_ALT_PD9_PD8": "Serial (on USART3 PD9/PD8)",
+      "STM32_SERIAL_UART4": "Serial (on UART4 PA0/PA1)",
+      "STM32_SERIAL_USART5": "Serial (on USART5 PD2/PD3)",
+      "STM32_CANBUS_PA11_PA12": "CAN bus (on PA11/PA12)",
+      "STM32_CANBUS_PA11_PA12_REMAP": "CAN bus (on PA9/PA10)",
+      "STM32_CANBUS_PA11_PB9": "CAN bus (on PA11/PB9)",
+      "STM32_MMENU_CANBUS_PB8_PB9": "CAN bus (on PB8/PB9)",
+      "STM32_MMENU_CANBUS_PI9_PH13": "CAN bus (on PI9/PH13)",
+      "STM32_MMENU_CANBUS_PB5_PB6": "CAN bus (on PB5/PB6)",
+      "STM32_MMENU_CANBUS_PB12_PB13": "CAN bus (on PB12/PB13)",
+      "STM32_MMENU_CANBUS_PD0_PD1": "CAN bus (on PD0/PD1)",
+      "STM32_MMENU_CANBUS_PB0_PB1": "CAN bus (on PB0/PB1)",
+      "STM32_MMENU_CANBUS_PD12_PD13": "CAN bus (on PD12/PD13)",
+      "STM32_MMENU_CANBUS_PC2_PC3": "CAN bus (on PC2/PC3)",
+      "STM32_USBCANBUS_PA11_PA12": "USB to CAN bus bridge (USB on PA11/PA12)"
+    },
+    "CAN bus interface": {
+      "STM32_CMENU_CANBUS_PB8_PB9": "CAN bus (on PB8/PB9)",
+      "STM32_CMENU_CANBUS_PI9_PH13": "CAN bus (on PI9/PH13)",
+      "STM32_CMENU_CANBUS_PB5_PB6": "CAN bus (on PB5/PB6)",
+      "STM32_CMENU_CANBUS_PB12_PB13": "CAN bus (on PB12/PB13)",
+      "STM32_CMENU_CANBUS_PD0_PD1": "CAN bus (on PD0/PD1)",
+      "STM32_CMENU_CANBUS_PB0_PB1": "CAN bus (on PB0/PB1)",
+      "STM32_CMENU_CANBUS_PD12_PD13": "CAN bus (on PD12/PD13)",
+      "STM32_CMENU_CANBUS_PC2_PC3": "CAN bus (on PC2/PC3)"
+    }
+  },
+  "MACH_AVR": {
+    "Processor model": {
+      "MACH_atmega2560": "atmega2560",
+      "MACH_atmega1280": "atmega1280",
+      "MACH_at90usb1286": "at90usb1286",
+      "MACH_at90usb646": "at90usb646",
+      "MACH_atmega32u4": "atmega32u4",
+      "MACH_atmega1284p": "atmega1284p",
+      "MACH_atmega644p": "atmega644p",
+      "MACH_atmega328p": "atmega328p",
+      "MACH_atmega328": "atmega328",
+      "MACH_atmega168": "atmega168"
+    },
+    "Clock Reference": {
+      "AVR_FREQ_16000000": "16Mhz",
+      "AVR_FREQ_20000000": "20Mhz",
+      "AVR_FREQ_8000000": "8Mhz"
+    },
+    "Communication interface": {
+      "AVR_USB": "USB",
+      "AVR_SERIAL_UART0": "UART0",
+      "AVR_SERIAL_UART1": "UART1",
+      "AVR_SERIAL_UART2": "UART2",
+      "AVR_SERIAL_UART3": "UART3"
+    }
+  },
+  "MACH_ATSAM": {
+    "Processor model": {
+      "MACH_SAM3X8E": "SAM3x8e (Arduino Due)",
+      "MACH_SAM3X8C": "SAM3x8c (Printrboard G2)",
+      "MACH_SAM4S8C": "SAM4s8c (Duet Maestro)",
+      "MACH_SAM4E8E": "SAM4e8e (Duet Wifi/Eth)",
+      "MACH_SAME70Q20B": "SAME70Q20B (Duet 3 6HC)"
+    },
+    "Communication interface": {
+      "ATSAM_USB": "USB",
+      "ATSAM_SERIAL": "Serial",
+      "ATSAM_MMENU_CANBUS_PC12_PD12": "CAN bus (on PC12/PD12)",
+      "ATSAM_MMENU_CANBUS_PB3_PB2": "CAN bus (on PB3/PB2)",
+      "ATSAM_USBCANBUS": "USB to CAN bus bridge",
+      "ATSAM_CMENU_CANBUS_PC12_PD12": "CAN bus (on PC12/PD12)",
+      "ATSAM_CMENU_CANBUS_PB3_PB2": "CAN bus (on PB3/PB2)"
+    }
+  },
+  "MACH_ATSAMD": {
+    "Processor model": {
+      "MACH_SAMC21G18": "SAMC21G18 (Duet 3 Toolboard 1LC)",
+      "MACH_SAMD21G18": "SAMD21G18 (Arduino Zero)",
+      "MACH_SAMD21E18": "SAMD21E18 (Adafruit Trinket M0)",
+      "MACH_SAMD21J18": "SAMD21J18 (ReprapWorld Minitronics v2)",
+      "MACH_SAMD21E15": "SAMD21E15",
+      "MACH_SAMD51G19": "SAMD51G19 (Adafruit ItsyBitsy M4)",
+      "MACH_SAMD51J19": "SAMD51J19 (Adafruit Metro M4)",
+      "MACH_SAMD51N19": "SAMD51N19",
+      "MACH_SAMD51P20": "SAMD51P20 (Adafruit Grand Central)",
+      "MACH_SAME51J19": "SAME51J19",
+      "MACH_SAME54P20": "SAME54P20"
+    },
+    "Bootloader offset": {
+      "SAMD_FLASH_START_2000": "8KiB bootloader (Arduino Zero)",
+      "SAMD_FLASH_START_4000": "16KiB bootloader (Arduino M0, Duet 3 Bootloader)",
+      "SAMD_FLASH_START_0000": "No bootloader"
+    },
+    "Clock Reference": {
+      "CLOCK_REF_X32K": "32.768Khz crystal",
+      "CLOCK_REF_X12M": "12Mhz crystal",
+      "CLOCK_REF_X25M": "25Mhz crystal",
+      "CLOCK_REF_INTERNAL": "Internal clock"
+    },
+    "Processor speed": {
+      "SAMD51_FREQ_120": "120 MHz (standard)",
+      "SAMD51_FREQ_150": "150 MHz (overclock)",
+      "SAMD51_FREQ_180": "180 MHz (overclock)",
+      "SAMD51_FREQ_200": "200 MHz (overclock)"
+    },
+    "Communication interface": {
+      "ATSAMD_USB": "USB",
+      "ATSAMD_SERIAL": "Serial",
+      "ATSAMD_MMENU_CANBUS_PA23_PA22": "CAN bus (on PA23/PA22)",
+      "ATSAMD_MMENU_CANBUS_PA25_PA24": "CAN bus (on PA25/PA24)",
+      "ATSAMD_MMENU_CANBUS_PB11_PB10": "CAN bus (on PB11/PB10)",
+      "ATSAMD_MMENU_CANBUS_PB13_PB12": "CAN bus (on PB13/PB12)",
+      "ATSAMD_MMENU_CANBUS_PB15_PB14": "CAN bus (on PB15/PB14)",
+      "ATSAMD_USBCANBUS": "USB to CAN bus bridge",
+      "ATSAMD_CMENU_CANBUS_PA23_PA22": "CAN bus (on PA23/PA22)",
+      "ATSAMD_CMENU_CANBUS_PB13_PB12": "CAN bus (on PB13/PB12)",
+      "ATSAMD_CMENU_CANBUS_PB15_PB14": "CAN bus (on PB15/PB14)"
+    }
+  },
+  "MACH_LPC176X": {
+    "Processor model": {
+      "MACH_LPC1768": "lpc1768 (100 MHz)",
+      "MACH_LPC1769": "lpc1769 (120 MHz)"
+    },
+    "Bootloader offset": {
+      "LPC_FLASH_START_4000": "16KiB bootloader (Smoothieware bootloader)",
+      "LPC_FLASH_START_0000": "No bootloader"
+    },
+    "Communication interface": {
+      "LPC_USB": "USB",
+      "LPC_SERIAL_UART0_P03_P02": "Serial (on UART0 P0.3/P0.2)",
+      "LPC_SERIAL_UART3_P429_P428": "Serial (on UART3 P4.29/P4.28)"
+    }
+  },
+  "MACH_RP2040": {
+    "Bootloader offset": {
+      "RP2040_FLASH_START_0100": "No bootloader",
+      "RP2040_FLASH_START_4000": "16KiB bootloader"
+    },
+    "Flash chip": {
+      "RP2040_FLASH_W25Q080": "W25Q080 with CLKDIV 2",
+      "RP2040_FLASH_GENERIC_03": "GENERIC_03H with CLKDIV 4"
+    },
+    "Communication interface": {
+      "RP2040_USB": "USB",
+      "RP2040_SERIAL_UART0": "Serial (on UART0 GPIO1/GPIO0)",
+      "RP2040_CANBUS": "CAN bus",
+      "RP2040_USBCANBUS": "USB to CAN bus bridge"
+    }
+  },
+  "MACH_HC32F460": {
+    "Communication interface": {
+      "HC32F460_SERIAL_PA7_PA8": "Serial (PA7 & PA8)",
+      "HC32F460_SERIAL_PA13_PA14": "Serial (PA13 & PA14)",
+      "HC32F460_SERIAL_PA3_PA2": "Serial (PA3 & PA2)",
+      "HC32F460_SERIAL_PH2_PB10": "Serial (PH2 & PB10)",
+      "HC32F460_SERIAL_PA15_PA9": "Serial (PA15 & PA09)",
+      "HC32F460_SERIAL_PC0_PC1": "Serial (PC0 & PC1)"
+    },
+    "Application Address": {
+      "HC32F460_FLASH_APPLICATION_ADDRESS_0x008000": "0x008000",
+      "HC32F460_FLASH_APPLICATION_ADDRESS_0x00C000": "0x00C000",
+      "HC32F460_FLASH_APPLICATION_ADDRESS_0x010000": "0x010000"
+    },
+    "Clock Reference": {
+      "HC32F460_CLOCK_SPEED_168M": "168 MHz",
+      "HC32F460_CLOCK_SPEED_200M": "200 MHz"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "Board Information": {
+    "Manufacturer": "Mellow",
+    "Name": "SHT42",
+    "Revision": "1.0",
+    "Role": "CAN",
+    "Flashing Methods": {
+      "Klipper": "make flash",
+      "Katapult": [
+        "dfu-util"
+      ]
+    },
+    "Links": {
+      "Board Link 1": "https://mellow-3d.github.io/fly-sht42_general.html",
+      "Board Link 2": ""
+    },
+    "Comment": "bla bla"
+  },
+  "Klipper Settings": [
+    "MACH_STM32",
+    "MACH_STM32F072",
+    "STM32_FLASH_START_2000",
+    "STM32_CLOCK_REF_8M",
+    "STM32_MMENU_CANBUS_PB8_PB9",
+    "CANBUS_FREQUENCY=1000000"
+  ],
+  "Katapult Settings": [
+    "MACH_STM32",
+    "MACH_STM32F072",
+    "STM32_FLASH_START_2000",
+    "STM32_CLOCK_REF_8M",
+    "STM32_MMENU_CANBUS_PB8_PB9",
+    "CANBUS_FREQUENCY=1000000",
+    "STM32_APP_START_2000",
+    "ENABLE_DOUBLE_RESET=y"
+  ]
+}
