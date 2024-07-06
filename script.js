@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const url = value ? value : '#';
     const label = value ? 'Link' : '';
 
-
     return `<a href="${url}" target="_blank">${label}</a>`;
   };
 
@@ -170,25 +169,46 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    const filename = `${rowData['Board Information'].Manufacturer}_${rowData['Board Information'].Name}_${rowData['Board Information'].Revision}_${rowData['Board Information'].Role}.oldconfig`;
+    const filename = `${rowData['Board Information'].Manufacturer}_${rowData['Board Information'].Name}_${rowData['Board Information'].Revision}_${rowData['Board Information'].Role}`
+      .replace(/\s+/g, '-') + '.oldconfig';
+
     const content = [
       `# Manufacturer: ${rowData['Board Information'].Manufacturer}`,
       `# Name: ${rowData['Board Information'].Name}`,
       `# Revision: ${rowData['Board Information'].Revision}`,
       `# Role: ${rowData['Board Information'].Role}`,
-      '',
-      ...settingsArray.map((setting) => {
-        const [key, value] = setting.split('=');
+      ''
+    ];
 
-        if (value === undefined) {
-          return key;
-        }
+    // Check if "CONFIG_LOW_LEVEL_OPTIONS" exists
+    // It seems that "make olddefconfig" does not respect settings
+    // that depend on a higher level if this level is not set
+    const lowLevelOptionExists = settingsArray.some((setting) => setting.trim().startsWith('LOW_LEVEL_OPTIONS'));
 
-        return (isNaN(value) && !/^-?\d+\.?\d*$/.test(value)) ? `${key}="${value}"` : `${key}=${value}`;
-      })
-    ].join('\n');
+    if (!lowLevelOptionExists) {
+      content.push('CONFIG_LOW_LEVEL_OPTIONS=y'); // Add default setting if it doesn't exist
+    }
 
-    const blob = new Blob([content], { type: 'text/plain' });
+    settingsArray.forEach((setting) => {
+      let [key, value] = setting.split('=');
+
+      key = `CONFIG_${key.trim()}`;
+
+      if (value === undefined) {
+        value = 'y';
+      }
+
+      if (value !== 'y' && isNaN(value) && !/^-?\d+\.?\d*$/.test(value)) {
+        value = `"${value.trim()}"`;
+      } else {
+        value = value.trim();
+      }
+
+      content.push(`${key}=${value}`);
+    });
+
+    // Make sure to use correct encoding (Unix line endings / ASCII)
+    const blob = new Blob([content.join('\n')], { type: 'text/plain;charset=ascii' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
 
