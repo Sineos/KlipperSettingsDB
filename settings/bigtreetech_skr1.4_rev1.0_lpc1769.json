@@ -1,0 +1,33 @@
+{
+  "Board Information": {
+    "Manufacturer": "BIGTREETECH",
+    "Name": "SKR 1.4 Turbo",
+    "Revision": "1.0",
+    "Role": "USB",
+    "Flashing Methods": {
+      "Klipper": "make flash",
+      "Katapult": [
+        "other"
+      ]
+    },
+    "Links": {
+      "Board Link 1": "https://github.com/bigtreetech/BIGTREETECH-OCTOPUS-Pro",
+      "Board Link 2": "https://github.com/bigtreetech/BIGTREETECH-OCTOPUS-V1.0"
+    },
+    "Comment": ""
+  },
+  "Klipper Settings": [
+    "LOW_LEVEL_OPTIONS=y",
+    "MACH_LPC176X",
+    "MACH_LPC1769",
+    "LPC_FLASH_START_4000",
+    "LPC_USB"
+  ],
+  "Katapult Settings": [
+    "MACH_LPC176X",
+    "MACH_LPC1769",
+    "LPC_FLASH_START_4000",
+    "LPC_USB",
+    "ENABLE_DOUBLE_RESET=y"
+  ]
+}
