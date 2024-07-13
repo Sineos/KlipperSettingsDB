@@ -24,7 +24,7 @@ if [ -f .config ]; then
   mv .config .config.bak
 fi
 
-# Clean the build environment
+# Clean and configure the build environment
 make clean
 make distclean
 

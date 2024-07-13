@@ -4,9 +4,23 @@
     "Name": "SHT42",
     "Revision": "1.0",
     "Role": "CAN",
-    "Flashing Methods": {
-      "Klipper": "make flash",
+    "Flashing Methods Initial": {
+      "Klipper": [
+        "make flash"
+      ],
       "Katapult": [
+        "dfu-util"
+      ]
+    },
+    "Flashing Methods Update": {
+      "Klipper": [
+        "make flash",
+        "SD-card",
+        "dfu-util"
+      ],
+      "Katapult": [
+        "make flash",
+        "SD-card",
         "dfu-util"
       ]
     },
