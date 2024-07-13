@@ -95,7 +95,7 @@ jobs:
         echo "$SETTINGS_JSON_FILES"
 
         # Set the environment variable
-        echo "CHANGED_FILES=$SETTINGS_JSON_FILES" >> $GITHUB_ENV
+        echo "CHANGED_FILES=$(echo "$SETTINGS_JSON_FILES" | tr '\n' ' ')" >> $GITHUB_ENV
       shell: bash
 
     - name: Process each changed JSON file for Klipper
