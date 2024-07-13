@@ -1,0 +1,56 @@
+{
+  "Board Information": {
+    "Manufacturer": "FYSETC",
+    "Name": "Nozzle-Input-Shaper",
+    "Revision": "1.0",
+    "Role": "USB",
+    "Flashing Methods Initial": {
+      "Klipper": [
+        "make flash"
+      ],
+      "Katapult": [
+        "dfu-util"
+      ]
+    },
+    "Flashing Methods Update": {
+      "Klipper": [
+        "make flash",
+        "SD-card",
+        "dfu-util"
+      ],
+      "Katapult": [
+        "make flash",
+        "SD-card",
+        "dfu-util"
+      ]
+    },
+    "Links": {
+      "Board Link 1": "https://github.com/FYSETC/Nozzle-Input-Shaper",
+      "Board Link 2": ""
+    },
+    "Comment": ""
+  },
+  "Klipper Settings": [
+    "LOW_LEVEL_OPTIONS=y",
+    "MACH_STM32",
+    "MACH_STM32F042",
+    "STM32_FLASH_START_0000",
+    "STM32_CLOCK_REF_INTERNAL",
+    "STM32_USB_PA11_PA12_REMAP",
+    "WANT_DISPLAYS=n",
+    "WANT_LIS2DW=n",
+    "WANT_LDC1612=n",
+    "WANT_SOFTWARE_I2C=n"
+  ],
+  "Katapult Settings": [
+    "MACH_STM32",
+    "MACH_STM32H743",
+    "STM32_FLASH_START_20000",
+    "STM32_CLOCK_REF_25M",
+    "STM32_USB_PA11_PA12",
+    "STM32_APP_START_20000",
+    "ENABLE_DOUBLE_RESET=y",
+    "ENABLE_LED=y",
+    "STATUS_LED_PIN=PA13"
+  ]
+}
