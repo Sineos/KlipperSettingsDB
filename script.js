@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const url = value ? value : '#';
     const label = value ? 'Link' : '';
 
+
     return `<a href="${url}" target="_blank">${label}</a>`;
   };
 
@@ -17,42 +18,38 @@ document.addEventListener('DOMContentLoaded', () => {
       { title: 'Name', field: 'Board Information.Name', headerFilter: 'input', responsive: 0 },
       { title: 'Revision', field: 'Board Information.Revision', headerFilter: 'input', responsive: 0 },
       { title: 'Role', field: 'Board Information.Role', headerFilter: 'input', responsive: 0 },
-      { title: 'Klipper Flashing Method', field: 'Board Information.Flashing Methods.Klipper', headerFilter: 'input', responsive: 0 },
-      { title: 'Katapult Flashing Method', field: 'Board Information.Flashing Methods.Katapult', headerFilter: 'input', responsive: 0 },
-      { title: 'Board Link 1', field: 'Board Information.Links.Board Link 1', responsive: 0, formatter: linkFormatter },
-      { title: 'Board Link 2', field: 'Board Information.Links.Board Link 2', responsive: 0, formatter: linkFormatter },
-      { title: 'Comment', field: 'Board Information.Comment', responsive: 1 },
-      { title: 'Klipper Settings', field: 'Klipper Settings', responsive: 5, formatter: 'html' },
-      { title: 'Katapult Settings', field: 'Katapult Settings', responsive: 5, formatter: 'html' }
+      { title: 'Klipper Flashing Method Initial', field: 'Board Information.Flashing Methods Initial.Klipper', headerFilter: 'input', formatter: flashingMethodFormatter, responsive: 0 },
+      { title: 'Klipper Flashing Method Update', field: 'Board Information.Flashing Methods Update.Klipper', headerFilter: 'input', formatter: flashingMethodFormatter, responsive: 0 },
+      { title: 'Katapult Flashing Method Initial', field: 'Board Information.Flashing Methods Initial.Katapult', headerFilter: 'input', formatter: flashingMethodFormatter, responsive: 0 },
+      { title: 'Katapult Flashing Method Update', field: 'Board Information.Flashing Methods Update.Katapult', headerFilter: 'input', formatter: flashingMethodFormatter, responsive: 0 },
+      { title: 'Board Link 1', field: 'Board Information.Links.Board Link 1', formatter: linkFormatter },
+      { title: 'Board Link 2', field: 'Board Information.Links.Board Link 2', formatter: linkFormatter, responsive: 0 },
+      { title: 'Comment', field: 'Board Information.Comment', formatter: commentFormatter },
+      { title: 'Klipper Settings', field: 'Klipper Settings', formatter: 'html', minWidth: 900 },
+      { title: 'Katapult Settings', field: 'Katapult Settings', formatter: 'html', minWidth: 900 },
+      {
+        title: 'Download Klipper Settings',
+        responsive: 0,
+        hozAlign: 'center',
+        formatter(cell, formatterParams, onRendered) {
+          const rowData = cell.getRow().getData();
+
+
+          return generateDownloadLink(rowData, 'Klipper Settings');
+        }
+      },
+      {
+        title: 'Download Katapult Settings',
+        responsive: 0,
+        hozAlign: 'center',
+        formatter(cell, formatterParams, onRendered) {
+          const rowData = cell.getRow().getData();
+
+
+          return generateDownloadLink(rowData, 'Katapult Settings');
+        }
+      }
     ];
-
-    // Add download columns with FontAwesome download icon
-    columns.push({
-      title: 'Download Klipper Settings',
-      formatter() {
-        return '<i class="fa fa-download" aria-hidden="true"></i>';
-      },
-      hozAlign: 'center',
-      cellClick(e, cell) {
-        const rowData = cell.getRow().getData();
-
-        downloadSettings(rowData, 'Klipper');
-      },
-      responsive: 3
-    });
-    columns.push({
-      title: 'Download Katapult Settings',
-      formatter() {
-        return '<i class="fa fa-download" aria-hidden="true"></i>';
-      },
-      hozAlign: 'center',
-      cellClick(e, cell) {
-        const rowData = cell.getRow().getData();
-
-        downloadSettings(rowData, 'Katapult');
-      },
-      responsive: 3
-    });
 
     // Translate settings
     data.forEach((row) => {
@@ -69,9 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const table = new Tabulator('#board-table', {
       data,
       columns,
-      layout: 'fitData',
+      layout: 'fitDataStretch',
       responsiveLayout: 'collapse',
-      rowHeader: { formatter: 'responsiveCollapse', width: 150, minWidth: 30, hozAlign: 'center', resizable: false, headerSort: false },
+      rowHeader: { formatter: 'responsiveCollapse', width: 30, minWidth: 30, hozAlign: 'center', resizable: false, headerSort: false },
       responsiveLayoutCollapseStartOpen: false,
       responsiveLayoutCollapseFormatter(data) {
         const list = document.createElement('ul');
@@ -79,6 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
         data.forEach((col) => {
           const item = document.createElement('li');
 
+          if (col.title === 'Comment' && !col.value) {
+            return;
+          } // Skip empty comments
           item.innerHTML = `<strong>${col.title}</strong> ${col.value}`;
           list.appendChild(item);
         });
@@ -86,137 +86,147 @@ document.addEventListener('DOMContentLoaded', () => {
         return Object.keys(data).length ? list : '';
       }
     });
-  });
 
-  function formatSettings(lookupJson, settings) {
-    let settingsArray = [];
+    function formatSettings(lookupJson, settings) {
+      let settingsArray = [];
 
-    if (typeof settings === 'string') {
-      settingsArray = settings.split('\n');
-    } else if (Array.isArray(settings)) {
-      settingsArray = settings;
-    } else {
-      console.error('Unexpected settings format:', settings);
+      if (typeof settings === 'string') {
+        settingsArray = settings.split('\n');
+      } else if (Array.isArray(settings)) {
+        settingsArray = settings;
+      } else {
+        console.error('Unexpected settings format:', settings);
 
-      return '';
+        return '';
+      }
+      const formattedItems = lookupItems(settingsArray, lookupJson);
+      const list = formattedItems.map((item) => `<li>${item.friendlySetting}: ${item.friendlyValue}</li>`).join('');
+
+
+      return `<ul>${list}</ul>`;
     }
 
-    const formattedItems = lookupItems(settingsArray, lookupJson);
+    function lookupItems(items, jsonStructure) {
+      const result = [];
 
-    const list = formattedItems.map((item) => `<li>${item.friendlySetting}: ${item.friendlyValue}</li>`).join('');
+      items.forEach((item) => {
+        const [setting, value] = item.split('=');
 
-    return `<ul>${list}</ul>`;
-  }
+        for (const category in jsonStructure) {
+          const categoryObj = jsonStructure[category];
 
-  function lookupItems(items, jsonStructure) {
-    const result = [];
-
-    items.forEach((item) => {
-      const [setting, value] = item.split('=');
-
-      for (const category in jsonStructure) {
-        const categoryObj = jsonStructure[category];
-
-        if (category === 'General Settings' && isTopLevel(categoryObj, setting)) {
-          result.push({
-            setting,
-            friendlySetting: categoryObj[setting],
-            friendlyValue: value || ''
-          });
-
-          return; // Exit the loop once the item is found
-        }
-
-        if (isTopLevel(categoryObj, setting)) {
-          result.push({
-            setting,
-            friendlySetting: category,
-            friendlyValue: categoryObj[setting] || ''
-          });
-
-          return; // Exit the loop once the item is found
-        }
-
-        for (const subCategory in categoryObj) {
-          const subCategoryObj = categoryObj[subCategory];
-
-          if (subCategoryObj.hasOwnProperty(setting)) {
+          if (category === 'General Settings' && isTopLevel(categoryObj, setting)) {
             result.push({
               setting,
-              friendlySetting: subCategory,
-              friendlyValue: subCategoryObj[setting] || ''
+              friendlySetting: categoryObj[setting],
+              friendlyValue: value || ''
             });
 
             return; // Exit the loop once the item is found
           }
+          if (isTopLevel(categoryObj, setting)) {
+            result.push({
+              setting,
+              friendlySetting: category,
+              friendlyValue: categoryObj[setting] || ''
+            });
+
+            return; // Exit the loop once the item is found
+          }
+          for (const subCategory in categoryObj) {
+            const subCategoryObj = categoryObj[subCategory];
+
+            if (subCategoryObj.hasOwnProperty(setting)) {
+              result.push({
+                setting,
+                friendlySetting: subCategory,
+                friendlyValue: subCategoryObj[setting] || ''
+              });
+
+              return; // Exit the loop once the item is found
+            }
+          }
         }
-      }
-    });
+      });
 
-    return result;
-  }
-
-  function isTopLevel(categoryObj, item) {
-    return categoryObj.hasOwnProperty(item);
-  }
-
-  function downloadSettings(rowData, type) {
-    const settingsArray = rowData[`${type} Settings Raw`]; // Use the raw settings from the original JSON
-
-    if (!settingsArray) {
-      console.error(`Raw settings for ${type} not found.`);
-
-      return;
+      return result;
     }
 
-    const filename = `${rowData['Board Information'].Manufacturer}_${rowData['Board Information'].Name}_${rowData['Board Information'].Revision}_${rowData['Board Information'].Role}`
-      .replace(/\s+/g, '-') + '.oldconfig';
-
-    const content = [
-      `# Manufacturer: ${rowData['Board Information'].Manufacturer}`,
-      `# Name: ${rowData['Board Information'].Name}`,
-      `# Revision: ${rowData['Board Information'].Revision}`,
-      `# Role: ${rowData['Board Information'].Role}`,
-      ''
-    ];
-
-    // Check if "CONFIG_LOW_LEVEL_OPTIONS" exists
-    // It seems that "make olddefconfig" does not respect settings
-    // that depend on a higher level if this level is not set
-    const lowLevelOptionExists = settingsArray.some((setting) => setting.trim().startsWith('LOW_LEVEL_OPTIONS'));
-
-    if (!lowLevelOptionExists) {
-      content.push('CONFIG_LOW_LEVEL_OPTIONS=y'); // Add default setting if it doesn't exist
+    function isTopLevel(categoryObj, item) {
+      return categoryObj.hasOwnProperty(item);
     }
 
-    settingsArray.forEach((setting) => {
-      let [key, value] = setting.split('=');
+    function generateDownloadLink(rowData, type) {
+      const boardInfo = rowData['Board Information'];
+      // Construct each part of the filename
+      const manufacturer = boardInfo.Manufacturer.trim().toLowerCase()
+        .replace(/\s+/g, '_');
+      const name = boardInfo.Name.trim().toLowerCase()
+        .replace(/\s+/g, '_');
+      const revision = boardInfo.Revision.trim().toLowerCase()
+        .replace(/\s+/g, '_');
+      const role = boardInfo.Role.trim().toLowerCase()
+        .replace(/\s+/g, '_');
+      const settingsType = type.replace(' ', '_').toLowerCase();
+      // Join the parts with underscores
+      const filename = `${manufacturer}_${name}_${revision}_${role}_${settingsType}.oldconfig`;
+      // Get the full path for the file URL
+      const currentUrl = window.location.href;
+      const baseUrl = currentUrl.substring(0, currentUrl.lastIndexOf('/'));
+      const fileUrl = `${baseUrl}/oldconfig/${filename}`;
+      // Generate download and copy links
+      const downloadLink = `<a href="${fileUrl}" download="${filename}" title="Download Setting"><i class="fa fa-download" aria-hidden="true"></i></a>`;
+      const copyLink = `<a href="#" data-clipboard-text="${fileUrl}" class="copy-link" title="Copy link to clipboard"><i class="fa fa-copy" aria-hidden="true"></i></a>`;
 
-      key = `CONFIG_${key.trim()}`;
 
-      if (value === undefined) {
-        value = 'y';
-      }
+      return `${downloadLink} / ${copyLink}`;
+    }
 
-      if (value !== 'y' && isNaN(value) && !/^-?\d+\.?\d*$/.test(value)) {
-        value = `"${value.trim()}"`;
+    function flashingMethodFormatter(cell, formatterParams, onRendered) {
+      const value = cell.getValue();
+
+      if (Array.isArray(value)) {
+        const firstElement = `<span style="color: green; font-weight: bold;">${value[0]}</span>`;
+        const restElements = value.slice(1).join(', ');
+        // Check if there are more than one elements in the array
+
+        if (value.length > 1) {
+          return `${firstElement}, ${restElements}`;
+        } else {
+          return firstElement;
+        }
       } else {
-        value = value.trim();
+        return value;
       }
+    }
 
-      content.push(`${key}=${value}`);
+    function commentFormatter(cell, formatterParams, onRendered) {
+      const value = cell.getValue();
+
+      if (!value) {
+        return ''; // Don't show anything if no comment is available
+      }
+      if (value.includes('\n')) {
+        const listItems = value.split('\n').map((line) => `<li>${line}</li>`)
+          .join('');
+
+
+        return `<ul>${listItems}</ul>`;
+      } else {
+        return value;
+      }
+    }
+
+    // Initialize ClipboardJS
+    new ClipboardJS('.copy-link').on('success', (e) => {
+      const originalTitle = e.trigger.title;
+
+      e.trigger.title = 'Copied!';
+      e.trigger.querySelector('i').style.color = 'green';
+      setTimeout(() => {
+        e.trigger.title = originalTitle;
+        e.trigger.querySelector('i').style.color = '';
+      }, 2000);
     });
-
-    // Make sure to use correct encoding (Unix line endings / ASCII)
-    const blob = new Blob([content.join('\n')], { type: 'text/plain;charset=ascii' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  }
+  });
 });

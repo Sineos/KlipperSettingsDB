@@ -13,9 +13,9 @@ if (!jsonFilePath || !buildType) {
 // Load the JSON configuration
 const config = JSON.parse(fs.readFileSync(jsonFilePath, 'utf8'));
 
-const manufacturer = config['Board Information']['Manufacturer'];
+const manufacturer = config['Board Information']['Manufacturer'].replace(/\s+/g, '-');
 const name = config['Board Information']['Name'].replace(/\s+/g, '-');
-const revision = config['Board Information']['Revision'];
+const revision = config['Board Information']['Revision'].replace(/\s+/g, '-');
 const role = config['Board Information']['Role'].replace(/\s+/g, '-');
 
 const klipperOutDir = 'klipper/out';
@@ -30,7 +30,7 @@ if (fs.existsSync(outputDir)) {
 }
 fs.mkdirSync(outputDir);
 
-// Function to rename and move files
+// Rename and move files
 function processFiles(sourceDir, configDir, prefix, files) {
   files.forEach((file) => {
     const sourcePath = path.join(sourceDir, file);
@@ -48,7 +48,7 @@ function processFiles(sourceDir, configDir, prefix, files) {
     }
   });
 
-  // Handle .config file
+  // Special case for .config file
   const configFilePath = path.join(configDir, '.config');
 
   if (fs.existsSync(configFilePath)) {
