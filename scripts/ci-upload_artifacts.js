@@ -13,9 +13,9 @@ if (!jsonFilePath || !buildType) {
 // Load the JSON configuration
 const config = JSON.parse(fs.readFileSync(jsonFilePath, 'utf8'));
 
-const manufacturer = config['Board Information']['Manufacturer']replace(/\s+/g, '-');
+const manufacturer = config['Board Information']['Manufacturer'].replace(/\s+/g, '-');
 const name = config['Board Information']['Name'].replace(/\s+/g, '-');
-const revision = config['Board Information']['Revision']replace(/\s+/g, '-');
+const revision = config['Board Information']['Revision'].replace(/\s+/g, '-');
 const role = config['Board Information']['Role'].replace(/\s+/g, '-');
 
 const klipperOutDir = 'klipper/out';
